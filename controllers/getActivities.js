@@ -6,8 +6,13 @@ const getActivities = (req, res) => {
 
   fs.readFile(filePath, 'utf8', (readError, userJson) => {
     if (readError) throw readError;
-
     const user = JSON.parse(userJson);
+    const activities = user.profile.activities;
+    const profileActivityId = req.params.profileActivityId;
+    if (profileActivityId) {
+      const profileActivity = activities.find(activity => activity._id === profileActivityId);
+      return res.status(200).send(profileActivity);
+    }
 
     res.status(200).send(user.profile.activities);
   });

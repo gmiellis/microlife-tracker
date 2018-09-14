@@ -27,6 +27,7 @@ describe('creates an activity', () => {
       const filePath = path.join(__dirname, '../controllers', 'user.json');
 
       fs.readFile(filePath, 'utf8', (error, userJson) => {
+        if (error) throw error;
         expect(response.statusCode).toEqual(200);
 
         const user = JSON.parse(userJson);

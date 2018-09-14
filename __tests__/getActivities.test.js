@@ -37,7 +37,7 @@ it('gets a list of the users activities', (done) => {
     });
   });
   afterEach(() => {
-    const filePath = path.join(__dirname, '../controllers', 'user.json');
+    path.join(__dirname, filePath);
     fs.writeFileSync(filePath, '{"profile":{"activities":[]}}');
   });
 });
