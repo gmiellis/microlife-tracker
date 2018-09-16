@@ -18,9 +18,7 @@ describe('user activities', () => {
         }],
       },
     };
-
     const filePath = path.join(__dirname, '../controllers', 'user.json');
-
     fs.writeFile(filePath, JSON.stringify(user), () => {
       const request = httpMocks.createRequest({
         method: 'GET',
@@ -29,7 +27,6 @@ describe('user activities', () => {
       const response = httpMocks.createResponse({
         eventEmitter: events.EventEmitter,
       });
-
       getActivities(request, response);
       response.on('end', () => {
         expect(response.statusCode).toEqual(200);
@@ -37,9 +34,9 @@ describe('user activities', () => {
         done();
       });
     });
-    afterEach(() => {
-      path.join(__dirname, filePath);
-      fs.writeFileSync(filePath, '{"profile":{"activities":[]}}');
-    });
+  });
+  afterEach(() => {
+    const filePath = path.join(__dirname, '../controllers', 'user.json');
+    fs.writeFileSync(filePath, '{"profile":{"activities":[]}}');
   });
 });
